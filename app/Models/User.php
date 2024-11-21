@@ -20,10 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
-        'role'
     ];
-    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -34,17 +33,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-   // tambahkan getter untuk role
-   public function isAdmin()
-   {
-       return $this->role === 'admin';
-   }
-
-   public function isUser()
-   {
-       return $this->role === 'user';
-   }
-
 
     /**
      * Get the attributes that should be cast.
@@ -56,7 +44,6 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'role' => 'string',
         ];
     }
 }

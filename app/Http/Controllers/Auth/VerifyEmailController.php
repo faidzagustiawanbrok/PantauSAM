@@ -15,27 +15,13 @@ class VerifyEmailController extends Controller
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return $this->redirectUserBasedOnRole($request->user());
+            return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 
-        return $this->redirectUserBasedOnRole($request->user());
+        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
     }
-
-    /**
-     * Redirect user based on their role.
-     */
-    // app/Http/Controllers/Auth/VerifyEmailController.php
-    protected function redirectUserBasedOnRole($user): RedirectResponse
-    {
-        if ($user->isAdmin()) {
-            return redirect()->route('admin.dashboard')->with('verified', 1);
-        }
-
-        return redirect()->route('dashboard')->with('verified', 1);
-    }
-
 }

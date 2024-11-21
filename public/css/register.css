@@ -280,7 +280,7 @@ body {
   .overlay-container {
     position: absolute;
     top: 0;
-    left: 50%;
+    left: 0%;
     width: 50%;
     height: 100%;
     transition: transform 0.6s ease-in-out;
@@ -315,7 +315,7 @@ body {
     z-index: 1; /* Menempatkan gradien di atas gambar */
     pointer-events: none; /* Membuat gradien tidak menghalangi interaksi */
     border-radius: inherit;
-    background: linear-gradient(90deg, rgba(43,39,56,1) 0%, rgba(66,60,86,0.71) 39%, rgba(84,76,109,0.48) 66%, rgba(103,98,121,0) 100%);
+    background: linear-gradient(270deg, rgba(43,39,56,1) 0%, rgba(66,60,86,0.71) 39%, rgba(84,76,109,0.48) 66%, rgba(103,98,121,0) 100%);
   }
 
 
@@ -384,33 +384,66 @@ body {
     margin-top: 5px;
   }
 
-  /* Modal Popup Styling */
-  .modal {
-    display: none;
+ /* Modal Container */
+.modal {
+    display: none; /* Modal tidak tampil secara default */
     position: fixed;
-    z-index: 1000;
+    z-index: 120;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
+  /* Modal Content */
   .modal-content {
-    background-color: #fefefe;
+    background-color: #E8E0FF;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    text-align: center;
-  }
+    margin-top: 7.5vw;
+    overflow-y: auto; /* Scroll hanya vertikal */
+    font-size: 2em;
+    padding-bottom: 5rem; /* Memberi gap di bawah konten *//* Latar belakang semi-transparan */
+    width: 60vw;
+    height: 35vw;
+    border-radius: 10px;
+    box-shadow: 0px 4px 250px 55px rgba(110,84,181,1);
+  -webkit-box-shadow: 0px 4px 250px 55px rgba(110,84,181,1);
+  -moz-box-shadow: 0px 4px 250px 55px rgba(110,84,181,1);
 
+  }
+  .modal-content h2{
+    margin-left: 2rem;
+    font-weight: 600;
+  }
+  .modal-content p{
+    margin-left: 2.2rem;
+    text-align: justify;
+    margin-top: -1.5rem;
+    margin-right: 4rem;
+
+  }
   .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    color: #000000;
+    position: absolute;
+    top: 10.4rem; /* Posisi atas */
+    right: 26.4rem; /* Posisi kanan */
+    font-size: 6rem; /* Ukuran font */
+    font-weight: 300;
+    background-color: #8a75e2;
+    justify-content: center;
+    height: 4rem; /* Tinggi tombol */
+    width: 4rem; /* Lebar tombol, buat sama dengan tinggi */
+    border-radius: 50%; /* Membuat background menjadi lingkaran */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 44px 8px rgba(8,7,8,1);
+  -webkit-box-shadow: 0px 4px 44px 8px rgba(8,7,8,1);
+  -moz-box-shadow: 0px 4px 44px 8px rgba(8,7,8,1);
   }
 
   .close:hover,
@@ -418,4 +451,46 @@ body {
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+  .setuju-btn {
+    display: block;
+    margin: 2rem auto 0 auto;
+    padding: 1rem 2rem;
+    background-color: #8a75e2;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    font-size: 2rem;
+    border-color: #000000;
+    width: 16rem;
+    border-radius: 4rem;
+    cursor: pointer;
+    box-shadow: 0px 4px 44px 8px rgba(8,7,8,1);
+  -webkit-box-shadow: 0px 4px 44px 8px rgba(8,7,8,1);
+  -moz-box-shadow: 0px 4px 44px 8px rgba(8,7,8,1);
+  }
+
+  .setuju-btn:hover {
+    background-color: #7059b7;
+  }
+
+  .modal-content::-webkit-scrollbar {
+
+    width: 20px; /* Lebar scrollbar */
+
+  }
+
+  .modal-content::-webkit-scrollbar-track {
+    background: transparent; /* Warna latar belakang scrollbar */
+    border-radius: 10px;
+
+  }
+
+  .modal-content::-webkit-scrollbar-thumb {
+    background-color: #6E54B5; /* Warna thumb */
+    border-radius: 10px;
+    border: 3px solid #E8E0FF; /* Border di sekitar thumb */
+  }
+
+  .modal-content::-webkit-scrollbar-thumb:hover {
+    background-color: #503895; /* Warna saat di-hover */
   }

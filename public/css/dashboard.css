@@ -115,3 +115,30 @@ html, body {
 .add-button button:hover {
   background-color: #5a189a;
 }
+
+/* Pop-up container */
+.popup-container {
+  display: none; /* Modal tidak tampil secara default */
+  position: fixed;
+  z-index: 120;
+  left: 50rem;
+  top: 20rem;
+
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+

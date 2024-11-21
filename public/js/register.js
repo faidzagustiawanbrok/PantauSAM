@@ -1,6 +1,6 @@
 // Ambil elemen input password dan ikon toggle berdasarkan halaman
 const passwordInput = document.getElementById('password-input');
-const togglePasswordIcon = document.getElementById('login-toggle-password'); // Gunakan ID sesuai halaman
+const togglePasswordIcon = document.getElementById('register-toggle-password'); // Gunakan ID sesuai halaman
 
 // Fungsi untuk toggle password visibility
 function togglePasswordVisibility() {
@@ -21,17 +21,6 @@ function togglePasswordVisibility() {
 togglePasswordIcon.addEventListener('click', togglePasswordVisibility);
 
 
-const registerButton = document.getElementById("register");
-const loginButton = document.getElementById("login");
-const container = document.getElementById("container");
-
-registerButton.addEventListener("click", () => {
-  container.classList.add("right-panel-active");
-});
-
-loginButton.addEventListener("click", () => {
-  container.classList.remove("right-panel-active");
-});
 
 // Ambil elemen modal
 const modal = document.getElementById("terms-modal");
