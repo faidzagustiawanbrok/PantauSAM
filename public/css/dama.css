@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 20rem;
+  height: 53rem;
+  background-color: #2B2738;
+  color: white;
+  position: fixed;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  top: 3rem;
+  left: 4rem;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  z-index: 2;
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Navbar pencarian */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color:transparent;
+  height: 60px;
+  position: fixed;
+  top: 1rem;
+  right: 40rem;
+  width:100%;
+  z-index: 2;
+}
+
+#searchInput {
+  width: 20rem;
+  height: 3rem;
+  padding: 8px;
+  border: none;
+  border-radius: 50px;
+  margin-right: 10px;
+
+  background-color: #2b2738ce;
+}
+
+#searchButton, #filterButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+#searchButton img, #filterButton img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Tombol plus di kanan bawah */
+.add-button {
+  position: absolute;
+  bottom: 5rem;
+  right: 5rem;
+  z-index: 2;
+}
+
+.add-button button {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: #6a1b9a;
+  color: white;
+  font-size: 5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.add-button button:hover {
+  background-color: #5a189a;
+}
