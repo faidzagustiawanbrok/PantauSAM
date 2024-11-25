@@ -59,11 +59,14 @@
           @error('password')
             <div class="alert alert-danger">{{ $message }}</div>
           @enderror
+
         </div>
 
         <!-- Confirm Password Input -->
+        <div class="input-password-group">
         <input type="password" name="password_confirmation" id="password-input" placeholder="Konfirmasi Password" required>
-
+        <img id="register-toggle-password" src="{{ asset('source/eye-slash-svgrepo-com.svg') }}" alt="Show Password" class="eye-icon">
+        </div>
         <!-- Terms and Conditions -->
         <div class="terms">
             <input type="checkbox" id="terms-checkbox" required>

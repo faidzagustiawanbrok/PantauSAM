@@ -8,7 +8,7 @@ function toggleSidebar() {
     toggleButton.classList.toggle('rotate');
     closeAllSubMenus();
   }
-
+  
   // Fungsi untuk menutup sidebar
   function closeSidebar() {
     if (!sidebar.classList.contains('close')) {
@@ -17,7 +17,7 @@ function toggleSidebar() {
     }
     closeAllSubMenus();
   }
-
+  
   // Fungsi untuk membuka sub-menu
   function toggleSubMenu(button) {
     if (!button.nextElementSibling.classList.contains('show')) {
@@ -25,13 +25,13 @@ function toggleSidebar() {
     }
     button.nextElementSibling.classList.toggle('show');
     button.classList.toggle('rotate');
-
+  
     if (sidebar.classList.contains('close')) {
       sidebar.classList.remove('close');
       toggleButton.classList.remove('rotate');
     }
   }
-
+  
   // Fungsi untuk menutup semua sub-menu
   function closeAllSubMenus() {
     Array.from(sidebar.getElementsByClassName('show')).forEach(ul => {
@@ -39,7 +39,7 @@ function toggleSidebar() {
       ul.previousElementSibling.classList.remove('rotate');
     });
   }
-
+  
   // Event listener untuk tombol toggle sidebar
   toggleButton.addEventListener('click', toggleSidebar);
 
@@ -62,7 +62,7 @@ dropdowns.forEach(dropdown => {
             selected.textContent = option.textContent;
             menu.classList.remove('menu-open');
             select.classList.remove('select-clicked');
-
+            
             // Here you can add code to handle the status change
             const reportId = dropdown.dataset.report;
             const newStatus = option.dataset.value;

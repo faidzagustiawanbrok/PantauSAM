@@ -1,8 +1,8 @@
-@extends('admin.layout')
+@extends('reports.layout')
 
 @section('content')
 <div class="card mt-5">
-  <h2 class="card-header">CROTNYA ADMIN DAH BISA COO</h2>
+  <h2 class="card-header">Laravel 11 CRUD with Image Upload Tutorial - ItSolutionStuff.com</h2>
   <div class="card-body">
 
         @session('success')
@@ -10,23 +10,17 @@
         @endsession
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-success btn-sm" href="{{ route('admin.create') }}"> <i class="fa fa-plus"></i> Create New report</a>
+            <a class="btn btn-success btn-sm" href="{{ route('reports.create') }}"> <i class="fa fa-plus"></i> Create New report</a>
         </div>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <x-dropdown-link :href="route('logout')"
-                    onclick="event.preventDefault();
-                                this.closest('form').submit();">
-                {{ __('Log Out') }}
-            </x-dropdown-link>
-        </form>
 
         <table class="table table-bordered table-striped mt-4">
             <thead>
                 <tr>
                     <th width="80px">No</th>
+                    <th>Image</th>
                     <th>Name</th>
+                    <th>Details</th>
+                    <th>Lokasi</th>
                     <th>Status</th>
                     <th width="250px">Action</th>
                 </tr>
@@ -36,14 +30,17 @@
             @forelse ($reports as $report)
                 <tr>
                     <td>{{ ++$i }}</td>
+                    <td><img src="/images/{{ $report->image }}" width="100px"></td>
                     <td>{{ $report->name }}</td>
+                    <td>{{ $report->detail }}</td>
+                    <td>{{ $report->lokasi }}</td>
                     <td>{{ $report->status }}</td>
                     <td>
-                        <form action="{{ route('admin.destroy',$report->id) }}" method="POST">
+                        <form action="{{ route('reports.destroy',$report->id) }}" method="POST">
 
-                            <a class="btn btn-info btn-sm" href="{{ route('admin.show',$report->id) }}"><i class="fa-solid fa-list"></i> Show</a>
+                            <a class="btn btn-info btn-sm" href="{{ route('reports.show',$report->id) }}"><i class="fa-solid fa-list"></i> Show</a>
 
-                            <a class="btn btn-primary btn-sm" href="{{ route('admin.edit',$report->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('reports.edit',$report->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 
                             @csrf
                             @method('DELETE')

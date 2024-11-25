@@ -86,3 +86,77 @@ document.getElementById("searchButton").addEventListener("click", function() {
         alert("Masukkan nama lokasi");
     }
 });
+
+// Get elements
+const openModalBtn = document.getElementById("openModalBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const modal = document.getElementById("modal");
+const notification = document.getElementById("notification");
+const notificationMessage = document.getElementById("notificationMessage");
+const reportForm = document.getElementById("reportForm");
+
+// Open modal
+openModalBtn.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+});
+
+// Close modal
+closeModalBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+// Close modal on successful/failed submission
+const closeAndNotify = (message, success = true) => {
+  notificationMessage.textContent = message;
+  notification.style.backgroundColor = success ? "#28a745" : "#dc3545";
+  notification.classList.add("show");
+  modal.classList.add("hidden");
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+  }, 3000);
+};
+
+// Form submission handling
+reportForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(reportForm);
+
+  try {
+    const response = await fetch("/api/reports", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) throw new Error("Failed to upload report.");
+
+    closeAndNotify("Laporan berhasil diunggah!", true);
+  } catch (error) {
+    closeAndNotify("Gagal mengunggah laporan!", false);
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Ambil elemen modal dan tombolnya
+    const modal = document.getElementById("modal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    // Buka modal saat tombol "+" diklik
+    openModalBtn.addEventListener("click", function () {
+        modal.classList.remove("hidden");
+    });
+
+    // Tutup modal saat tombol "X" diklik
+    closeModalBtn.addEventListener("click", function () {
+        modal.classList.add("hidden");
+    });
+
+    // Tambahkan event lain jika modal perlu ditutup dengan cara lain, misalnya saat mengklik di luar modal
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display("none");
+        }
+    };
+});

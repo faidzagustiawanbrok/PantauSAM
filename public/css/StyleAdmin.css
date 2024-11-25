@@ -133,7 +133,7 @@ body{
   #sidebar.close {
     display: none; /* Sembunyikan sidebar */
   }
-
+  
 main{
   padding: min(30px, 7%);
 }
@@ -265,7 +265,7 @@ body {
     position: relative;
     right: -800px; /* Jarak dari tepi kanan elemen laporan */
     bottom: 20px;
-
+    
     min-width: 150px; /* Lebar minimum dropdown */
     z-index: 100; /* Supaya dropdown berada di atas elemen lainnya */
 }
