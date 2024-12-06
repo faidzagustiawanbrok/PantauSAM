@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+
+.logo{
+    width: 17rem;
+}
+/* Sidebar */
+.sidebar {
+    width: 111rem;
+    height: 53rem;
+    background-color: #2B2738;
+    color: white;
+    position: fixed;
+    border-radius: 2rem;
+    top: 3rem;
+    left: 4rem;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 2;
+  }
+
+
+
+  .sidebar ul {
+    list-style-type: none;
+    width: 18rem;
+  }
+
+  .sidebar ul li {
+    margin: 20px 0;
+      display: flex;
+      font-size: 1.2em;
+      font-weight: lighter;
+      align-items: center; /* Vertically centers the icon and text */
+  }
+
+  .sidebar ul li a {
+    color: white;
+    text-decoration: none;
+
+
+  }
+  .sidebar ul li a.active {
+    background-color: #6E54B5; /* Darker background for selected item */
+    padding: 1rem 2rem;
+    width: 100%;
+    margin-left: -1.23rem;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 1.4em;
+}
+
+
+  .sidebar ul li a:hover {
+    background-color: #6E54B5;
+    padding: 10px 20px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+      font-weight: bold;
+  }
+
+
+.hidden {
+    display: none;
+}
+
+
+  /* Notification Styles */
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1a1a2e;
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .notification.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.kotak{
+    margin-left: 22rem;
+    margin-top: -16rem;
+}
+
+.report-card {
+    background-color: #4F4C6B;
+    color: #fff;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 82rem;
+}
+
+.report-content {
+    display: flex;
+    align-items: center;
+    margin-left: -48rem;
+
+}
+
+.report-content img {
+    margin-right: 20px; /* Space between the image and text */
+}
+
+.text-content p {
+    margin: 5px 0;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status.selesai {
+    background-color: green;
+    color: white;
+}
+
+.status.proses {
+    background-color: orange;
+    color: white;
+}
+
+.status.ditolak {
+    background-color: red;
+    color: white;
+}
+
+.status.diterima {
+    background-color: rgb(0, 89, 255);
+    color: white;
+}

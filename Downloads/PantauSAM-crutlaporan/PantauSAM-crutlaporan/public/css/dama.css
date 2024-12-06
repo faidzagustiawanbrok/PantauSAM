@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+.hidden {
+    display: none;
+}
+#confirmLocationBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745; /* Warna hijau */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   /* Awalnya disembunyikan */
+    z-index: 1000; /* Agar muncul di atas elemen lain */
+}
+
+#confirmLocationBtn:hover {
+    background-color: #218838; /* Warna hijau lebih gelap saat hover */
+}
+
+#confirmLocationBtn.hidden {
+    display: none;
+}
+
+/* Sidebar */
+/* Sidebar */
+.sidebar {
+    width: 18rem;
+    height: 53rem;
+    background-color: #2B2738;
+    color: white;
+    position: fixed;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    top: 3rem;
+    left: 4rem;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 2;
+  }
+
+
+
+  .sidebar ul {
+    list-style-type: none;
+    width: 18rem;
+  }
+
+  .sidebar ul li {
+    margin: 20px 0;
+      display: flex;
+      font-size: 1.2em;
+      font-weight: lighter;
+      align-items: center; /* Vertically centers the icon and text */
+  }
+
+  .sidebar ul li a {
+    color: white;
+    text-decoration: none;
+
+
+  }
+  .sidebar ul li a.active {
+    background-color: #6E54B5; /* Darker background for selected item */
+    padding: 1rem 2rem;
+    width: 100%;
+    margin-left: -1.23rem;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 1.4em;
+}
+
+
+  .sidebar ul li a:hover {
+    background-color: #6E54B5;
+    padding: 10px 20px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+      font-weight: bold;
+  }
+/* Navbar pencarian */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color:transparent;
+  height: 60px;
+  position: fixed;
+  top: 1rem;
+  right: 40rem;
+  width:100%;
+  z-index: 2;
+}
+
+#searchInput {
+  width: 20rem;
+  height: 3rem;
+  padding: 8px;
+  border: none;
+  border-radius: 50px;
+  margin-right: 10px;
+
+  background-color: #2b2738ce;
+}
+
+#searchButton, #filterButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+#searchButton img, #filterButton img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Tombol plus di kanan bawah */
+.add-button {
+  position: absolute;
+  bottom: 5rem;
+  right: 5rem;
+  z-index: 2;
+}
+
+.add-button button {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: #6a1b9a;
+  color: white;
+  font-size: 5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.add-button button:hover {
+  background-color: #5a189a;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.8); /* Background semi-transparan */
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px; /* Sesuaikan ukuran modal */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+  /* Notification Styles */
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1a1a2e;
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .notification.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  .hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
