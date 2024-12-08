@@ -24,6 +24,8 @@ class User extends Authenticatable
         'telepon',
         'alamat',
         'kelamin',
+        'provider',
+        'provider_id',
     ];
 
     /**

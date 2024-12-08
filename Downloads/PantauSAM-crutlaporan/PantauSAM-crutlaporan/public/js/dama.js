@@ -11,23 +11,7 @@ var geojsonData = {
     "type": "FeatureCollection",
     "features": [
 
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "Jembatan B"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [112.6325, -7.9790],
-                        [112.6340, -7.9785],
-                        [112.6330, -7.9770],
-                        [112.6325, -7.9790]
-                    ]
-                ]
-            }
-        }
+
     ]
 };
 
@@ -51,12 +35,15 @@ L.geoJSON(geojsonData, {
 
 // Get elements
 const openModalBtn = document.getElementById("openModalBtn");
-const closeModalBtn = document.getElementById("closeModalBtn");
 const addPinBtn = document.getElementById("addPinBtn");
 const confirmLocationBtn = document.createElement("button"); // Tombol konfirmasi lokasi
 const modal = document.getElementById("modal");
 const mapDiv = document.getElementById("map");
 let marker;
+
+// Dapatkan elemen sidebar dan tombol
+const sidebar = document.querySelector('.sidebar');
+const add = document.querySelector('.add-button');
 
 // Style tombol konfirmasi lokasi
 confirmLocationBtn.id = "confirmLocationBtn";
@@ -64,15 +51,26 @@ confirmLocationBtn.textContent = "Konfirmasi Lokasi";
 confirmLocationBtn.classList.add("hidden");
 document.body.appendChild(confirmLocationBtn);
 
-// Open modal
-openModalBtn.addEventListener("click", () => {
-    modal.classList.remove("hidden");
+
+
+let isModalOpen = false; // Flag untuk memeriksa status modal
+
+openModalBtn.addEventListener('click', () => {
+    if (isModalOpen) {
+        modal.classList.remove('show'); // Sembunyikan modal dengan animasi
+        setTimeout(() => modal.classList.add('hidden'), 300); // Tunggu animasi selesai sebelum menyembunyikan
+        sidebar.classList.remove('hiden'); // Tampilkan sidebar
+        add.classList.remove('transition');
+    } else {
+        modal.classList.remove('hidden'); // Tampilkan modal
+        setTimeout(() => modal.classList.add('show'), 10); // Tambahkan kelas 'show' setelah modal terlihat
+        sidebar.classList.add('hiden'); // Sembunyikan sidebar
+        add.classList.add('transition');
+    }
+    isModalOpen = !isModalOpen; // Toggle status modal
 });
 
-// Close modal
-closeModalBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-});
+
 
 // Tambahkan pin merah di peta saat tombol "Tambah Pin" diklik
 addPinBtn.addEventListener("click", (event) => {
@@ -141,4 +139,36 @@ window.onload = function() {
     } else {
         setActiveLink('dashboard');  // Default to dashboard if no match
     }
+}
+
+let page = 1;
+const reportsSection = document.querySelector('.reports-section');
+
+reportsSection.addEventListener('scroll', () => {
+    if (reportsSection.scrollTop + reportsSection.clientHeight >= reportsSection.scrollHeight) {
+        loadMoreReports();
+    }
+});
+
+function loadMoreReports() {
+    fetch(`/api/reports?page=${++page}`)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(report => {
+                const reportCard = document.createElement('div');
+                reportCard.className = 'report-card';
+                reportCard.innerHTML = `
+                    <div class="report-content">
+                        <img src="/images/${report.image}" width="150px" alt="Report Image">
+                        <div class="text-content">
+                            <p><strong>Lokasi:</strong> ${report.Nama_Lokasi}</p>
+                            <p><strong>Tanggal dibuat:</strong> ${report.created_at}</p>
+                            <p><strong>Detail Kerusakan:</strong> ${report.detail}</p>
+                            <p><strong>Status laporan:</strong> <span class="status ${report.status.toLowerCase()}">${report.status}</span></p>
+                        </div>
+                    </div>`;
+                reportsSection.appendChild(reportCard);
+            });
+        })
+        .catch(error => console.error('Error:', error));
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -23,13 +24,11 @@ class ReportController extends Controller
                     ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function index(): View
-{
-    $reports = Report::orderBy('id', 'asc')->paginate(5);
+    {
+        $reports = Report::orderBy('id', 'desc')->get(); // Ambil semua data tanpa pagination
+        return view('pengumuman', compact('reports'));
+    }
 
-    // Verify that the data is passed correctly to the view
-    return view('riwayat', compact('reports'))
-                    ->with('i', (request()->input('page', 1) - 1) * 5);
-}
 
 
     /**
@@ -44,29 +43,35 @@ class ReportController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'Nama_Lokasi' => 'required',
-            'Latitude' => 'required',
-            'Longitude' => 'required',
-            'detail' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+{
+    $request->validate([
+        'Nama_Lokasi' => 'required',
+        'Latitude' => 'required',
+        'Longitude' => 'required',
+        'detail' => 'required',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
 
-        $input = $request->all();
+    $input = $request->all();
 
-        if ($image = $request->file('image')) {
-            $destinationPath = 'images/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        }
+    // Menambahkan user_id yang sesuai dengan ID pengguna yang sedang login
 
-        Report::create(attributes: $input);
+    $input['user_id'] = Auth::id(); // Mendapatkan ID pengguna yang sedang login
 
-        return redirect()->route('admin.dashboard')
-                         ->with('success', 'Report created successfully.');
+    if ($image = $request->file('image')) {
+        $destinationPath = 'images/';
+        $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        $image->move($destinationPath, $profileImage);
+        $input['image'] = "$profileImage";
     }
+
+    // Membuat laporan dengan atribut yang sudah ditambahkan user_id
+    Report::create($input);
+
+    return redirect()->route('admin.dashboard')
+                     ->with('success', 'Report created successfully.');
+}
+
 
     /**
      * Display the specified resource.
@@ -115,4 +120,18 @@ class ReportController extends Controller
         return redirect()->route('admin.dashboard')
                          ->with('success', 'Report deleted successfully');
     }
+
+
+    public function showReports()
+    {
+        $user = Auth::user(); // Mendapatkan pengguna yang sedang login
+        $reports = Report::where('user_id', $user->id) // Hanya laporan milik user
+                        ->orderBy('id', 'asc') // Mengurutkan berdasarkan id secara ascending
+                        ->paginate(5); // Pagination untuk 5 laporan per halaman
+
+        return view('riwayat', compact('reports'))
+                        ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+
 }

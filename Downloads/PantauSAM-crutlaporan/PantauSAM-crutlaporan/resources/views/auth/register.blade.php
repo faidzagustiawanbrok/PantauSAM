@@ -79,8 +79,8 @@
 
         <!-- Google Login Option -->
         <div class="divider">atau menggunakan</div>
-        <button type="button" class="google-login">
-          <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" alt="Google Logo" width="20" style="vertical-align:middle;"> Google
+        <button type="button" class="google-login"onclick="window.location='{{ route('login.provider', ['provider' => 'google']) }}'">
+            <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" alt="Google Logo" width="20" style="vertical-align:middle;"> Google
         </button>
       </form>
     </div>

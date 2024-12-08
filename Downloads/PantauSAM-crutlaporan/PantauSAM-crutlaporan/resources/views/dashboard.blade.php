@@ -24,7 +24,6 @@
 <!-- Modal Popup -->
 <div id="modal" class="modal hidden">
     <div class="modal-content">
-        <button id="closeModalBtn" class="close-btn">X</button>
         <h2>Buat Laporan</h2>
         <p>Buat laporanmu agar segera kami tangani!</p>
 
@@ -95,7 +94,7 @@
         <ul>
             <li><a id="dashboard" class="active"><i class="fas fa-home"></i> Dashboard utama</a></li>
             <li><a href="/riwayat" id="riwayat" ><i class="fas fa-history"></i> Riwayat laporan</a></li>
-            <li><a href="#" id="notifikasi"><i class="fas fa-bell"></i> Notifikasi</a></li>
+            <li><a href="/pengumuman" id="Pengumuman"><i class="fas fa-bell"></i> Pengumuman</a></li>
             <li><a href="/profile" id="dashboard" ><i class="fas fa-home"></i> profile</a></li>
         </ul>
 

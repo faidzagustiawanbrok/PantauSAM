@@ -20,16 +20,18 @@
 </div>
 
     <!-- Sidebar -->
-    <div class="sidebar">
-        <img class="logo"src="source/Logo.png" alt="logo pantausam">
+<div class="sidebar">
+    <!-- Bagian Kiri -->
+    <div class="option-section">
+        <img class="logo" src="source/Logo.png" alt="logo pantausam">
         <ul>
-            <li><a href="/dashboard" id="dashboard" ><i class="fas fa-home"></i> Dashboard utama</a></li>
-            <li><a id="riwayat" class="active"><i class="fas fa-history"></i> Riwayat laporan</a></li> <!-- Active by default -->
-            <li><a href="pengumuman" id="notifikasi" ><i class="fas fa-bell"></i> Pengumuman</a></li>
-            <li><a href="/profile" id="dashboard" ><i class="fas fa-home"></i> profile</a></li>
+            <li><a href="/dashboard" id="dashboard"><i class="fas fa-home"></i> Dashboard utama</a></li>
+            <li><a href="/riwayat" id="riwayat"><i class="fas fa-history"></i> Riwayat laporan</a></li>
+            <li><a id="notifikasi" class="active"><i class="fas fa-bell"></i> Pengumuman</a></li>
+            <li><a href="/profile" id="dashboard"><i class="fas fa-user"></i> Profile</a></li>
         </ul>
-
-           <!-- Bagian Kanan -->
+    </div>
+    <!-- Bagian Kanan -->
     <div class="reports-section">
         @if($reports->isEmpty())
             <p>Tidak ada laporan yang tersedia.</p>
@@ -53,7 +55,8 @@
             </ul>
         @endif
     </div>
-    </div>
+</div>
+
 
 
     <form method="POST" action="{{ route('logout') }}">

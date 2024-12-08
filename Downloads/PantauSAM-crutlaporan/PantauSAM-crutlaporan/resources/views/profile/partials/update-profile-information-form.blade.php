@@ -1,6 +1,7 @@
 <head>
     <!-- Add Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/profile.css">
 </head>
 
 
@@ -57,31 +58,25 @@
 
 
         <div class="flex justify-center">
-            <div class="relative">
-                <!-- Periksa apakah pengguna memiliki foto profil, jika tidak tampilkan default avatar -->
-                @if (!empty($user->foto) )
-                <img src="{{ asset($user->foto) }}" width="500px" id="profile-img" alt="foto_profil">
-                @else
-                <img src="{{ asset('images/default-avatar.jpg') }}" width="500px" id="profile-img" alt="Default Avatar" />
-
-                @endif
-
-
-                <!-- Input file untuk memilih foto -->
-                <input type="file" name="foto" id="file-input"
-                       class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-                       onchange="handleFileChange(event)">
-
-                <!-- Tombol kamera untuk visualisasi perubahan -->
-                    <div class="absolute bottom-2 right-2 bg-blue-500 text-white rounded-full p-2 cursor-pointer hover:bg-blue-600 transition">
-                        <i class="fas fa-camera"></i>
-                    </div>
+            <div class="avatar-container">
+                <img src="{{ asset($user->foto ?: 'images/default-avatar.jpg') }}" width="500px" id="profile-img" alt="foto_profil" onclick="openPopup()">
             </div>
+
 
             <!-- Preview nama file yang dipilih (opsional) -->
             <div id="file-name" class="text-sm text-gray-500 mt-2 text-center"></div>
-        </div>
+        <!-- Gambar profil di halaman utama -->
+    </div>
 
+<!-- Popup untuk menampilkan gambar lebih besar dan mengganti foto -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">×</span>
+        <!-- Gambar di dalam popup -->
+        <img src="{{ asset($user->foto ?: 'images/default-avatar.jpg') }}" width="500px" id="popup-img" alt="foto_profil">
+        <input type="file" name="foto" id="file-input" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer" onchange="changePhoto(event)">
+    </div>
+</div>
 
 
 
@@ -127,20 +122,48 @@
 </section>
 
 <script>
-    function handleFileChange(event) {
-        const fileInput = event.target;
-        const fileNameDisplay = document.getElementById('file-name');
+// Fungsi untuk membuka popup
+function openPopup() {
+    // Pastikan popup tampil
+    document.getElementById('popup').style.display = 'flex';
+}
 
-        // Perbarui nama file di UI (opsional)
-        if (fileInput.files && fileInput.files[0]) {
-            fileNameDisplay.textContent = `File: ${fileInput.files[0].name}`;
+// Fungsi untuk menutup popup
+function closePopup() {
+    // Menutup popup
+    document.getElementById('popup').style.display = 'none';
+}
 
-            // Menampilkan preview gambar secara instan (opsional)
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profile-img').src = e.target.result;
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
+// Fungsi untuk mengubah foto berdasarkan input file
+function changePhoto(event) {
+    const file = event.target.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            // Ganti gambar di popup
+            document.getElementById('popup-img').src = e.target.result;
+
+            // Ganti gambar profil utama di halaman (preview langsung)
+            const profileImage = document.getElementById('profile-img');
+            if (profileImage) {
+                profileImage.src = e.target.result;
+            }
+        };
+
+        reader.readAsDataURL(file);
     }
+}
+
+// Menutup popup jika klik di luar konten popup
+document.getElementById('popup').addEventListener('click', function(event) {
+    if (event.target === document.getElementById('popup')) {
+        closePopup();
+    }
+});
+
+
+
+
 </script>

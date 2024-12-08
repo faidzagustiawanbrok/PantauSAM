@@ -57,3 +57,35 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
+
+
+
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/auth/{provider}', function ($provider) {
+    return Socialite::driver($provider)->redirect();
+})->name('login.provider');
+
+Route::get('/auth/{provider}/callback', function ($provider) {
+    $user = Socialite::driver($provider)->user();
+
+    // Periksa apakah user sudah ada berdasarkan email
+    $existingUser = User::where('email', $user->getEmail())->first();
+
+    if ($existingUser) {
+        Auth::login($existingUser);
+    } else {
+        // Buat user baru
+        $newUser = User::create([
+            'name' => $user->getName(),
+            'email' => $user->getEmail(),
+            'password' => bcrypt('default-password'), // Bisa diubah sesuai kebutuhan
+        ]);
+
+        Auth::login($newUser);
+    }
+
+    return redirect('/dashboard'); // Sesuaikan dengan halaman tujuan setelah login
+});

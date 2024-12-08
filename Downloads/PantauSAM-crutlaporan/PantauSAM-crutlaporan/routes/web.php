@@ -63,7 +63,7 @@ Route::get('/admin/{report}/edit', [ReportController::class, 'edit'])->name('adm
 Route::put('/admin/{report}', [ReportController::class, 'update'])->name('admin.update');
 Route::delete('/admin/{report}', [ReportController::class, 'destroy'])->name('admin.destroy');
 
-Route::get('/riwayat', [ReportController::class, 'index'])->name('riwayat');
+Route::get('/pengumuman', [ReportController::class, 'index'])->name('pengumuman');
 
 
 
@@ -74,3 +74,6 @@ Route::post('/dashboard', [UploadController::class, 'store'])->name('dashboard.s
 require __DIR__.'/auth.php';
 
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/riwayat', [ReportController::class, 'showReports'])->name('riwayat');
+});
